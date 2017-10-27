@@ -15,7 +15,8 @@
         android:layout_weight="1"
         android:src="@drawable/logo" />
 
-    <TextView
+    <Button
+        android:id="@+id/jobSeekerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -23,6 +24,8 @@
         android:background="#B3E5FC"
         android:gravity="center"
         android:padding="20dp"
+        android:onClick="jobSeekerLogin"
+        android:textAllCaps="false"
         android:text="Need a job ?"
         android:textColor="#000000"
         android:textSize="20sp" />
@@ -59,7 +62,8 @@
 
     </LinearLayout>
 
-    <TextView
+    <Button
+        android:id="@+id/employerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -70,7 +74,9 @@
         android:background="#B3E5FC"
         android:gravity="center"
         android:padding="20dp"
+        android:textAllCaps="false"
         android:text="Want to hire ?"
+        android:onClick="employerLogin"
         android:textColor="#000000"
         android:textSize="20sp" />
 
