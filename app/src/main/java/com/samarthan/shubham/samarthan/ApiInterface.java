@@ -2,7 +2,6 @@ package com.samarthan.shubham.samarthan;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -16,5 +15,9 @@ public interface ApiInterface {
 
     @POST("seeker/login")
     Call<SeekerCover> getSeeker(@Body EmployeeLoginDetails employeeLoginDetails);
+
+    @POST("api/job")
+    Call<jobTemp> getjob(@Body Job job);
+
 
 }

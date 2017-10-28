@@ -14,9 +14,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class employerDetailPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -60,7 +66,7 @@ public class employerDetailPage extends AppCompatActivity
 
         Spinner acceptableDisability = (Spinner)f2.findViewById(R.id.AcceptableDisability);
 
-        Employer employer = (Employer) getIntent().getParcelableExtra("employee-parcel");
+        final Employer employer = (Employer) getIntent().getParcelableExtra("employee-parcel");
 
         UserEmailtv.setText(employer.getEmail());
         UserNametv.setText(employer.getName());
@@ -70,6 +76,74 @@ public class employerDetailPage extends AppCompatActivity
         editText.setEnabled(false);
         editText.setTypeface(null, Typeface.BOLD);
         editText.setTextSize(30);
+
+        Button submit=findViewById(R.id.submit);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Job job=new Job();
+
+                EditText companyname,jobtitle,jobdes,perks;
+                jobtitle=findViewById(R.id.JobTitle);
+                jobdes=findViewById(R.id.JobDescription);
+                companyname=findViewById(R.id.CompanyName);
+                perks=findViewById(R.id.Perks);
+                Spinner spinner=findViewById(R.id.AcceptableDisability);
+                Spinner range=findViewById(R.id.SalaryRange);
+                String minmax=range.getSelectedItem().toString();
+              String result[]=minmax.split("-");
+              job.setMin(Integer.parseInt(result[0]));
+                job.setMax(Integer.parseInt(result[1]));
+                job.setDisability(spinner.getSelectedItem().toString());
+                job.setJobTitle(jobtitle.getText().toString());
+                job.setJobDescription(jobdes.getText().toString());
+                job.setEmail(employer.getEmail());
+                job.setPerks(perks.getText().toString());
+
+                //Toast.makeText(getApplicationContext(),job.getDisability()+job.getEmail()+job.getJobDescription(),Toast.LENGTH_SHORT).show();
+
+
+                Call<jobTemp> call = ApiClient.getInterface().getjob(job);
+                call.enqueue(new Callback<jobTemp>() {
+                    @Override
+                    public void onResponse(Call<jobTemp> call, Response<jobTemp> response) {
+                        if(response.isSuccessful())
+                        {  if(response.body().getConfirmation().compareTo("success")==0)
+                            Toast.makeText(getApplicationContext(),"posted succesfully",Toast.LENGTH_SHORT).show();
+                           else
+                            Toast.makeText(getApplicationContext(),response.body().getMessage().toString(),Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                            Toast.makeText(getApplicationContext(),response.body().getMessage().toString(),Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<jobTemp> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),"error occured ,check network",Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+            }
+        });
+
+    }
+
+    private void formOnClear()
+    {
+        EditText companyname,jobtitle,jobdes,perks;
+        jobtitle=findViewById(R.id.JobTitle);
+        jobdes=findViewById(R.id.JobDescription);
+
+        perks=findViewById(R.id.Perks);
+        Spinner spinner=findViewById(R.id.AcceptableDisability);
+        Spinner range=findViewById(R.id.SalaryRange);
+        jobtitle.setText("");
+        jobdes.setText("");
+        perks.setText("");
+        spinner.setSelection(0);
+        range.setSelection(0);
 
     }
 
