@@ -29,7 +29,8 @@
         android:layout_height="wrap_content"
          android:layout_marginLeft="20dp"
          android:layout_marginRight="20dp"
-         android:textSize="15sp"
+         android:textSize="20sp"
+         tools:text="hELLO woRLD!"
         />
 
 
@@ -114,7 +115,8 @@
         android:id="@+id/AcceptableDisability"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp" />
+        android:layout_margin="20dp"
+        android:entries="@array/DiabilityListArray"/>
     </LinearLayout>
 
 </ScrollView>
