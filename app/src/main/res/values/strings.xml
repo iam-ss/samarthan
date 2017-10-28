@@ -18,4 +18,6 @@
         <item>80000-100000</item>
         <item>90000-11000</item>
     </string-array>
+    <string name="title_activity_user">UserActivity</string>
+    <string name="title_activity_not_build">NotBuild</string>
 </resources>
