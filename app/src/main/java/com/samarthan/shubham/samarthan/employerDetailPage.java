@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
 
 public class employerDetailPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,6 +41,12 @@ public class employerDetailPage extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View f1=findViewById(R.id.fragment1);
+        View f2=f1.findViewById(R.id.fragment11);
+        f2.findViewById(R.id.SalaryRange);
+
+        Spinner acceptableDisability = (Spinner)f2.findViewById(R.id.AcceptableDisability);
+
     }
 
     @Override
@@ -98,4 +105,6 @@ public class employerDetailPage extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

@@ -47,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:id="@+id/loginEmail"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"/>
@@ -72,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:id="@+id/loginPassword"
             android:layout_marginRight="30dp"
             android:layout_margin="30dp"/>
     </RelativeLayout>
@@ -83,6 +85,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"

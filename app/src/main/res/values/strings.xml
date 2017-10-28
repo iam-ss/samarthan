@@ -6,4 +6,16 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string-array name="SalaryRangeArray">
+        <item>10000-30000</item>
+        <item>20000-40000</item>
+        <item>30000-50000</item>
+        <item>40000-60000</item>
+        <item>50000-70000</item>
+        <item>60000-80000</item>
+        <item>70000-90000</item>
+        <item>80000-100000</item>
+        <item>90000-11000</item>
+    </string-array>
 </resources>
