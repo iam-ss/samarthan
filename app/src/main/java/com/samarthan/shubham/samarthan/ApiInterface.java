@@ -12,8 +12,7 @@ import retrofit2.http.POST;
 public interface ApiInterface {
 
     @POST("employer/login")
-    Call<Employer> getEmployer(@Body EmployeeLoginDetails employeeLoginDetails);
+    Call<EmployeDataAndConfirmation> getEmployer(@Body EmployeeLoginDetails employeeLoginDetails);
 
-    @GET("api/employer")
-    Call<EmployeDataAndConfirmation> getDetails();
+
 }

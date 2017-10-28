@@ -8,7 +8,7 @@ import com.samarthan.shubham.samarthan.Employer;
 
 public class EmployeDataAndConfirmation {
     private String confirmation;
-    private Employer[] results;
+    private Employer result;
 
     public String getConfirmation() {
         return confirmation;
@@ -18,11 +18,11 @@ public class EmployeDataAndConfirmation {
         this.confirmation = confirmation;
     }
 
-    public Employer[] getResults() {
-        return results;
+    public Employer getResult() {
+        return result;
     }
 
-    public void setResults(Employer[] results) {
-        this.results = results;
+    public void setResults(Employer result) {
+        this.result = result;
     }
 }
