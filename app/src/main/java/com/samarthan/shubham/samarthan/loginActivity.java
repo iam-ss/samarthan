@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ public class loginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         Bundle bundle = getIntent().getExtras();
         int status = bundle.getInt("personStatus");
@@ -45,7 +47,6 @@ public class loginActivity extends AppCompatActivity {
 
                     employeeLoginDetails.setEmail(lEmail);
                     employeeLoginDetails.setPassword(lpassword);
-                    Log.d("GA", employeeLoginDetails.getEmail());
 
                     Call<EmployeDataAndConfirmation> call = ApiClient.getInterface().getEmployer(employeeLoginDetails);
                     call.enqueue(new Callback<EmployeDataAndConfirmation>() {
@@ -55,15 +56,18 @@ public class loginActivity extends AppCompatActivity {
                             {
                                 EmployeDataAndConfirmation employeDataAndConfirmation = response.body();
                                 if (employeDataAndConfirmation.getConfirmation().compareTo("success")==0) {
-                                    Toast.makeText(loginActivity.this, employeDataAndConfirmation.getResult().getPhone(), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(loginActivity.this,employerDetailPage.class);
+                                    intent.putExtra("employee-parcel",employeDataAndConfirmation.getResult());
+                                    startActivity(intent);
+
                                 } else {
-                                    Toast.makeText(loginActivity.this, "inside Nooo", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(loginActivity.this, "Bad Email ID or Password", Toast.LENGTH_SHORT).show();
                                 }
                                 loginButton.setClickable(true);
                             }
                             else
                             {
-                                Toast.makeText(loginActivity.this, "No network", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(loginActivity.this, "Bad Email ID or Password", Toast.LENGTH_SHORT).show();
                                 loginButton.setClickable(true);
                             }
                         }

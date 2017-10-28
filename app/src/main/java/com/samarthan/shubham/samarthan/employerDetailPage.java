@@ -1,5 +1,6 @@
 package com.samarthan.shubham.samarthan;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,7 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class employerDetailPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -21,6 +25,7 @@ public class employerDetailPage extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employer_detail_page);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,6 +52,13 @@ public class employerDetailPage extends AppCompatActivity
 
         Spinner acceptableDisability = (Spinner)f2.findViewById(R.id.AcceptableDisability);
 
+        Employer employer = (Employer) getIntent().getParcelableExtra("employee-parcel");
+        EditText editText = (EditText) findViewById(R.id.CompanyName);
+        editText.setText(employer.getName(),TextView.BufferType.EDITABLE);
+        editText.setFocusable(false);
+        editText.setEnabled(false);
+        editText.setTypeface(null, Typeface.BOLD);
+        editText.setTextSize(30);
     }
 
     @Override

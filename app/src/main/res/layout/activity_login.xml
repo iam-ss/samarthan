@@ -75,6 +75,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:id="@+id/loginPassword"
+            android:inputType="textPassword"
             android:layout_marginRight="30dp"
             android:layout_margin="30dp"/>
     </RelativeLayout>
