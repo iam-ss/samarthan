@@ -49,16 +49,28 @@ public class employerDetailPage extends AppCompatActivity
         View f1=findViewById(R.id.fragment1);
         View f2=f1.findViewById(R.id.fragment11);
         f2.findViewById(R.id.SalaryRange);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView UserNametv=(TextView)headerView.findViewById(R.id.empname);
+        TextView UserEmailtv=(TextView)headerView.findViewById(R.id.empemail);
+
+
+
+
 
         Spinner acceptableDisability = (Spinner)f2.findViewById(R.id.AcceptableDisability);
 
         Employer employer = (Employer) getIntent().getParcelableExtra("employee-parcel");
+
+        UserEmailtv.setText(employer.getEmail());
+        UserNametv.setText(employer.getName());
         EditText editText = (EditText) findViewById(R.id.CompanyName);
         editText.setText(employer.getName(),TextView.BufferType.EDITABLE);
         editText.setFocusable(false);
         editText.setEnabled(false);
         editText.setTypeface(null, Typeface.BOLD);
         editText.setTextSize(30);
+
     }
 
     @Override

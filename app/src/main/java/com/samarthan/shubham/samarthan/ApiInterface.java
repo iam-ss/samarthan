@@ -14,5 +14,7 @@ public interface ApiInterface {
     @POST("employer/login")
     Call<EmployeDataAndConfirmation> getEmployer(@Body EmployeeLoginDetails employeeLoginDetails);
 
+    @POST("seeker/login")
+    Call<SeekerCover> getSeeker(@Body EmployeeLoginDetails employeeLoginDetails);
 
 }

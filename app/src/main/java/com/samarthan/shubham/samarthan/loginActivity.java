@@ -1,6 +1,7 @@
 package com.samarthan.shubham.samarthan;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import retrofit2.Response;
 public class loginActivity extends AppCompatActivity {
     EditText email, password;
     String lEmail, lpassword;
+     Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class loginActivity extends AppCompatActivity {
 
         if (status == 1) {
 
-            final Button loginButton = findViewById(R.id.loginButton);
+            loginButton = findViewById(R.id.loginButton);
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -84,6 +86,61 @@ public class loginActivity extends AppCompatActivity {
 
                 }
             });
+
+        }
+        else
+        {
+            loginButton = findViewById(R.id.loginButton);
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    loginButton.setClickable(false);
+
+
+                    EmployeeLoginDetails employeeLoginDetails = new EmployeeLoginDetails();
+                    lEmail = email.getText().toString();
+                    lpassword = password.getText().toString();
+
+
+                    employeeLoginDetails.setEmail(lEmail);
+                    employeeLoginDetails.setPassword(lpassword);
+
+                    Call<SeekerCover> call = ApiClient.getInterface().getSeeker(employeeLoginDetails);
+                    call.enqueue(new Callback<SeekerCover>() {
+                        @Override
+                        public void onResponse(Call<SeekerCover> call, Response<SeekerCover> response) {
+                            if (response.isSuccessful())
+                            {
+                                SeekerCover seekerCover = response.body();
+                                if (seekerCover.getConfirmation().compareTo("success")==0) {
+                                    Intent intent = new Intent(loginActivity.this,UserActivity.class);
+                                    intent.putExtra("parcel",  seekerCover.getResult());
+                                    Log.d("yeh",seekerCover.getResult().getEmail());
+                                    startActivity(intent);
+
+                                } else {
+                                    Toast.makeText(loginActivity.this, "Bad Email ID or Password", Toast.LENGTH_SHORT).show();
+                                }
+                                loginButton.setClickable(true);
+                            }
+                            else
+                            {
+                                Toast.makeText(loginActivity.this, "Bad Email ID or Password", Toast.LENGTH_SHORT).show();
+                                loginButton.setClickable(true);
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<SeekerCover> call, Throwable t) {
+
+                        }
+                    });
+
+                }
+            });
+
+
 
         }
 
